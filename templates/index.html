@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mark AI — неоновый интеллект</title>
-    <!-- Google Fonts + Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -28,7 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* Неоновые линии по краям */
         body::before {
             content: '';
             position: fixed;
@@ -51,7 +49,6 @@
             z-index: 0;
         }
 
-        /* Главное стекло */
         .glass-card {
             background: rgba(16, 14, 23, 0.65);
             backdrop-filter: blur(20px) saturate(180%);
@@ -71,7 +68,6 @@
             box-shadow: 0 25px 60px -10px #000, 0 0 0 1px rgba(0,245,255,0.3) inset, 0 0 40px rgba(0,245,255,0.2);
         }
 
-        /* Неоновый текст (фиолетовый + голубой) */
         .neon-purple {
             color: #e0b3ff;
             text-shadow: 0 0 5px #9d4edd, 0 0 15px #9d4edd, 0 0 30px #7b2cbf;
@@ -82,7 +78,6 @@
             text-shadow: 0 0 5px #00f5ff, 0 0 15px #00e0ff, 0 0 30px #0099ff;
         }
 
-        /* Кнопки — неоновые, стеклянные */
         .btn-neon {
             background: rgba(20, 18, 30, 0.7);
             border: 1.5px solid #9d4edd;
@@ -122,7 +117,6 @@
             box-shadow: 0 0 30px #00f5ff, 0 0 60px #0099ff;
         }
 
-        /* Поля ввода — стекло, неон при фокусе */
         .glass-input {
             background: rgba(10, 8, 15, 0.7);
             border: 1px solid rgba(157, 78, 221, 0.5);
@@ -141,7 +135,6 @@
             box-shadow: 0 0 0 3px rgba(0,245,255,0.1), 0 0 20px #00f5ff;
         }
 
-        /* Анимация переключения экранов */
         .screen {
             display: none;
             animation: fadeGlow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -154,7 +147,7 @@
             100% { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        /* ---------- ЧАТ: неоновые пузыри ---------- */
+        /* ---------- ЧАТ ---------- */
         .chat-messages {
             height: 550px;
             overflow-y: auto;
@@ -199,7 +192,6 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* Индикатор печати — пульсирующие неоновые точки */
         .typing-indicator {
             display: flex;
             gap: 10px;
@@ -228,7 +220,7 @@
             50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 30px #00f5ff; }
         }
 
-        /* ---------- КНОПКА НАСТРОЕК (неон) ---------- */
+        /* ---------- НАСТРОЙКИ ---------- */
         .settings-btn {
             position: absolute;
             top: 30px;
@@ -257,7 +249,6 @@
             box-shadow: 0 0 30px #00f5ff;
         }
 
-        /* Меню настроек */
         .settings-menu {
             position: absolute;
             top: 100px;
@@ -297,7 +288,7 @@
             transform: translateX(6px);
         }
 
-        /* Список правил с неоном */
+        /* ---------- ПРАВИЛА ---------- */
         .rule-list {
             list-style: none;
             background: rgba(157,78,221,0.05);
@@ -320,7 +311,36 @@
             text-shadow: 0 0 8px #00f5ff;
         }
 
-        /* Адаптивность */
+        /* ---------- ТАБЫ АВТОРИЗАЦИИ ---------- */
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        .auth-tab {
+            padding: 12px 30px;
+            border-radius: 40px;
+            border: 1px solid rgba(157,78,221,0.5);
+            background: transparent;
+            color: #e0b3ff;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 600;
+        }
+        .auth-tab.active {
+            background: #9d4edd;
+            color: black;
+            border-color: #e0b3ff;
+            box-shadow: 0 0 20px #9d4edd;
+        }
+        .auth-form {
+            display: none;
+        }
+        .auth-form.active {
+            display: block;
+        }
+
         @media (max-width: 700px) {
             .glass-card { padding: 24px; }
             .chat-messages { height: 450px; }
@@ -342,37 +362,39 @@
 
     <!-- Главное стекло -->
     <div class="glass-card">
-        <!-- ЭКРАН 1: АВТОРИЗАЦИЯ -->
+        <!-- ЭКРАН 1: АВТОРИЗАЦИЯ (регистрация / вход) -->
         <div id="authScreen" class="screen active-screen">
             <div style="text-align: center; margin-bottom: 30px;">
                 <h1 style="font-size: 4rem; font-weight: 800; letter-spacing: -2px;" class="neon-purple">Mark AI</h1>
                 <p style="color: #b5b0cc; font-size: 1.2rem; margin-top: 8px;">неоновый диалог с интеллектом</p>
             </div>
             <div style="max-width: 400px; margin: 0 auto;">
-                <!-- Шаг 1: email -->
-                <div id="emailStep">
-                    <label style="color: #c77dff; margin-bottom: 10px; display: block; font-weight: 500;">Электронная почта</label>
-                    <input type="email" id="emailInput" class="glass-input" placeholder="hello@mark.ai" autocomplete="off">
-                    <div style="margin-top: 25px; display: flex; align-items: center; gap: 12px;">
-                        <input type="checkbox" id="rememberMe" style="width: 18px; height: 18px; accent-color: #9d4edd; border-radius: 4px;">
-                        <label for="rememberMe" style="color: rgba(255,255,255,0.8);">Запомнить меня</label>
-                    </div>
-                    <button id="sendCodeBtn" class="btn-neon" style="width: 100%; margin-top: 35px;">
-                        <i class="fas fa-envelope"></i> Отправить код
+                <!-- Табы: Вход / Регистрация -->
+                <div class="auth-tabs">
+                    <div id="loginTab" class="auth-tab active">Вход</div>
+                    <div id="registerTab" class="auth-tab">Регистрация</div>
+                </div>
+
+                <!-- Форма входа -->
+                <div id="loginForm" class="auth-form active">
+                    <input type="text" id="loginUsername" class="glass-input" placeholder="Логин" autocomplete="off" style="margin-bottom: 16px;">
+                    <input type="password" id="loginPassword" class="glass-input" placeholder="Пароль" autocomplete="off">
+                    <button id="loginBtn" class="btn-neon" style="width: 100%; margin-top: 30px;">
+                        <i class="fas fa-sign-in-alt"></i> Войти
                     </button>
                 </div>
-                <!-- Шаг 2: код -->
-                <div id="codeStep" style="display: none;">
-                    <label style="color: #00f5ff; margin-bottom: 10px; display: block; font-weight: 500;">Код из письма</label>
-                    <input type="text" id="codeInput" class="glass-input" placeholder="6 цифр" maxlength="6">
-                    <button id="verifyCodeBtn" class="btn-neon btn-neon-cyan" style="width: 100%; margin-top: 30px;">
-                        <i class="fas fa-check"></i> Войти
+
+                <!-- Форма регистрации -->
+                <div id="registerForm" class="auth-form">
+                    <input type="text" id="regUsername" class="glass-input" placeholder="Логин" autocomplete="off" style="margin-bottom: 16px;">
+                    <input type="password" id="regPassword" class="glass-input" placeholder="Пароль" autocomplete="off" style="margin-bottom: 16px;">
+                    <input type="password" id="regPasswordConfirm" class="glass-input" placeholder="Повторите пароль" autocomplete="off">
+                    <button id="registerBtn" class="btn-neon btn-neon-cyan" style="width: 100%; margin-top: 30px;">
+                        <i class="fas fa-user-plus"></i> Зарегистрироваться
                     </button>
-                    <p style="margin-top: 25px; text-align: center;">
-                        <a href="#" id="backToEmail" style="color: #a5f0ff; opacity: 0.9; text-decoration: none; border-bottom: 1px solid #00f5ff; padding-bottom: 2px;">← назад</a>
-                    </p>
                 </div>
-                <div id="codeStatus" style="margin-top: 20px; color: #e0b3ff; text-align: center; font-size: 0.95rem;"></div>
+
+                <div id="authStatus" style="margin-top: 20px; color: #e0b3ff; text-align: center; font-size: 0.95rem;"></div>
             </div>
         </div>
 
@@ -417,9 +439,7 @@
                     <i class="fas fa-circle" style="color: #00f5ff; font-size: 0.7rem; margin-right: 6px; text-shadow: 0 0 8px #00f5ff;"></i> в сети
                 </span>
             </div>
-            <!-- Контейнер сообщений -->
             <div id="chatMessages" class="chat-messages"></div>
-            <!-- Поле ввода -->
             <div style="display: flex; gap: 12px; margin-top: 20px;">
                 <input type="text" id="chatInput" class="glass-input" placeholder="Напишите сообщение..." autocomplete="off">
                 <button id="sendMessageBtn" class="btn-neon btn-neon-cyan" style="padding: 16px 24px;">
@@ -431,11 +451,11 @@
 
     <script>
         // ------------------------------------------------------------
-        // ПОЛНОСТЬЮ ФУНКЦИОНАЛЬНЫЙ ФРОНТЕНД — АНИМАЦИИ, API, ОНБОРДИНГ
+        // ПОЛНОСТЬЮ ФУНКЦИОНАЛЬНЫЙ ФРОНТЕНД — РЕГИСТРАЦИЯ/ЛОГИН, ЧАТ, НЕОН
         // ------------------------------------------------------------
         let currentUser = null;
 
-        // DOM-элементы
+        // DOM элементы
         const authScreen = document.getElementById('authScreen');
         const onboardingScreen = document.getElementById('onboardingScreen');
         const chatScreen = document.getElementById('chatScreen');
@@ -445,13 +465,33 @@
         const supportLink = document.getElementById('supportLink');
         const logoutBtn = document.getElementById('logoutBtn');
 
+        // Табы авторизации
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+        });
+
+        registerTab.addEventListener('click', () => {
+            registerTab.classList.add('active');
+            loginTab.classList.remove('active');
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+        });
+
         // Управление экранами
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active-screen'));
             document.getElementById(screenId).classList.add('active-screen');
         }
 
-        // Эффект печати (побуквенно)
+        // Эффект печати
         async function typeMessage(element, text, speed = 20) {
             element.innerHTML = '';
             for (let char of text) {
@@ -467,7 +507,6 @@
             msgDiv.classList.add('message', sender === 'user' ? 'user-message' : 'ai-message');
             
             if (sender === 'ai' && withTypingEffect) {
-                // Индикатор печати
                 const typingDiv = document.createElement('div');
                 typingDiv.className = 'typing-indicator';
                 for (let i = 0; i < 3; i++) {
@@ -479,7 +518,6 @@
                 chatContainer.appendChild(msgDiv);
                 chatContainer.scrollTop = chatContainer.scrollHeight;
 
-                // Замена на напечатанный текст
                 setTimeout(async () => {
                     msgDiv.innerHTML = '';
                     const contentDiv = document.createElement('div');
@@ -500,42 +538,21 @@
             document.getElementById('chatMessages').innerHTML = '';
         }
 
-        // ---------- АВТОРИЗАЦИЯ ----------
-        document.getElementById('sendCodeBtn').addEventListener('click', async function() {
-            const email = document.getElementById('emailInput').value.trim();
-            if (!email) return alert('Введите email');
-            const response = await fetch('/api/auth/send-code', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ email })
-            });
-            const data = await response.json();
-            if (response.ok) {
-                document.getElementById('emailStep').style.display = 'none';
-                document.getElementById('codeStep').style.display = 'block';
-                document.getElementById('codeStatus').innerText = '✨ Код отправлен на вашу почту';
-                window.tempEmail = email;
-            } else {
-                alert(data.error || 'Ошибка');
+        // ---------- РЕГИСТРАЦИЯ ----------
+        document.getElementById('registerBtn').addEventListener('click', async function() {
+            const username = document.getElementById('regUsername').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const password_confirm = document.getElementById('regPasswordConfirm').value;
+
+            if (!username || !password || !password_confirm) {
+                document.getElementById('authStatus').innerText = '❌ Все поля обязательны';
+                return;
             }
-        });
 
-        document.getElementById('backToEmail').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('emailStep').style.display = 'block';
-            document.getElementById('codeStep').style.display = 'none';
-            document.getElementById('codeStatus').innerText = '';
-        });
-
-        document.getElementById('verifyCodeBtn').addEventListener('click', async function() {
-            const code = document.getElementById('codeInput').value.trim();
-            const email = window.tempEmail;
-            const remember = document.getElementById('rememberMe').checked;
-            if (!code) return alert('Введите код');
-            const response = await fetch('/api/auth/verify', {
+            const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ email, code, remember })
+                body: JSON.stringify({ username, password, password_confirm })
             });
             const data = await response.json();
             if (response.ok) {
@@ -551,7 +568,40 @@
                     addMessageToChat('ai', 'Здравствуйте. Я — Mark AI. Чем могу помочь?', true);
                 }
             } else {
-                alert(data.error || 'Неверный код');
+                document.getElementById('authStatus').innerText = '❌ ' + (data.error || 'Ошибка регистрации');
+            }
+        });
+
+        // ---------- ВХОД ----------
+        document.getElementById('loginBtn').addEventListener('click', async function() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!username || !password) {
+                document.getElementById('authStatus').innerText = '❌ Введите логин и пароль';
+                return;
+            }
+
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ username, password })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                currentUser = data.user;
+                if (!currentUser.onboarding_accepted) {
+                    showScreen('onboardingScreen');
+                    document.getElementById('welcomeStep').style.display = 'block';
+                    document.getElementById('rulesStep').style.display = 'none';
+                } else {
+                    showScreen('chatScreen');
+                    settingsContainer.style.display = 'block';
+                    clearChat();
+                    addMessageToChat('ai', 'С возвращением!', true);
+                }
+            } else {
+                document.getElementById('authStatus').innerText = '❌ ' + (data.error || 'Ошибка входа');
             }
         });
 
@@ -585,7 +635,6 @@
             addMessageToChat('user', text);
             input.value = '';
 
-            // Показываем индикатор набора
             const aiMsgDiv = document.createElement('div');
             aiMsgDiv.classList.add('message', 'ai-message');
             const typingDiv = document.createElement('div');
@@ -633,13 +682,16 @@
             settingsContainer.style.display = 'none';
             settingsMenu.style.display = 'none';
             showScreen('authScreen');
-            document.getElementById('emailStep').style.display = 'block';
-            document.getElementById('codeStep').style.display = 'none';
-            document.getElementById('emailInput').value = '';
-            document.getElementById('codeInput').value = '';
+            // Сброс полей
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('regUsername').value = '';
+            document.getElementById('regPassword').value = '';
+            document.getElementById('regPasswordConfirm').value = '';
+            document.getElementById('authStatus').innerText = '';
         });
 
-        // ---------- ПРОВЕРКА СЕССИИ ПРИ ЗАГРУЗКЕ ----------
+        // ---------- ПРОВЕРКА СЕССИИ ----------
         async function loadCurrentUser() {
             const response = await fetch('/api/auth/me');
             if (response.ok) {
@@ -659,6 +711,7 @@
                 showScreen('authScreen');
             }
         }
+
         loadCurrentUser();
     </script>
 </body>
