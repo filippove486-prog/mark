@@ -20,8 +20,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-change-in-prod')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///markai.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
-app.config['SESSION_PERMANENT'] = True
-session.permanent = True
+app.config['SESSION_PERMANENT'] = True          # Конфигурация, работает без request context
 
 # -------------------------------------------------------------------
 # Flask-Mail конфигурация (берётся из переменных окружения)
@@ -56,7 +55,7 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 # -------------------------------------------------------------------
-# Временное хранилище одноразовых кодов (для простоты — в памяти)
+# Временное хранилище одноразовых кодов (в памяти)
 # -------------------------------------------------------------------
 otp_storage = {}   # email: {'code': '123456', 'expires': datetime}
 
@@ -152,7 +151,7 @@ def verify_code():
         db.session.commit()
 
     login_user(user, remember=remember)
-    session.permanent = True
+    session.permanent = True  # <--- ТЕПЕРЬ ЗДЕСЬ, ВНУТРИ ЗАПРОСА
     otp_storage.pop(email, None)
 
     return jsonify({
