@@ -50,7 +50,7 @@ def load_user(user_id):
 # -------------------------------------------------------------------
 # Интеграция с GigaChat / нейросетью
 # -------------------------------------------------------------------
-GIGACHAT_API_KEY = os.getenv('MDE5YzRjMTctZmQ1NC03YWQxLWFmMzAtN2YxMjRlODYxYzJiOjUyM2RhNGZjLTEyZWItNDk5NS1hN2NhLWE3MWQyNGRlZDkzNw==')
+GIGACHAT_API_KEY = os.getenv('MDE5YzUzODQtODY2OS03ZDY5LWJhYmUtZGZmMTc0ZDQ4NjY1OjY2NWY4ZTg3LWUzMjctNGMyNi05ODNjLWY2M2YwNjRmMGUzYg==')
 GIGACHAT_API_URL = os.getenv('https://gigachat.devices.sberbank.ru/api/v1/chat/completions')  # замените на реальный эндпоинт
 
 def ask_ai(user_message):
@@ -180,5 +180,6 @@ def chat():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
