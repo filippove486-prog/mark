@@ -1,4 +1,4 @@
-=import os
+import os
 import uuid
 import requests
 from datetime import datetime, timedelta
@@ -180,3 +180,4 @@ def chat():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
